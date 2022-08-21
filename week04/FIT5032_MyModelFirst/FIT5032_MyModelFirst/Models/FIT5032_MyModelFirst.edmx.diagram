@@ -5,7 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0c80bf2ead85468b8aadc48ca203c2d8" Name="Diagram1" >
-        <EntityTypeShape EntityType="FIT5032_MyModelFirst.Entity1" Width="1.5" PointX="3.625" PointY="2" />
+        <EntityTypeShape EntityType="FIT5032_MyModelFirst.Student" Width="1.5" PointX="2.875" PointY="0.5" />
+        <EntityTypeShape EntityType="FIT5032_MyModelFirst.Unit" Width="1.5" PointX="5.5" PointY="0.5" />
+        <AssociationConnector Association="FIT5032_MyModelFirst.StudentUnit" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

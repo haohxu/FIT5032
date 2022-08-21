@@ -26,5 +26,12 @@ namespace FIT5032_MyModelFirst.Controllers
 
             return View();
         }
+
+        public ActionResult Student() 
+        {
+            ViewBag.Message = "Your student page";
+
+            return View();
+        }
     }
 }
