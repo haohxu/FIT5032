@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NNP_Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="NNP_ModelStoreContainer">
+    <EntitySet Name="Customers" EntityType="NNP_Model.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Medicines" EntityType="NNP_Model.Store.Medicines" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="NNP_Model.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Order_Medicine" EntityType="NNP_Model.Store.Order_Medicine" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CustomerOrder" Association="NNP_Model.Store.CustomerOrder">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="Order_MedicineOrder" Association="NNP_Model.Store.Order_MedicineOrder">
+      <End Role="Order_Medicine" EntitySet="Order_Medicine" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="Order_MedicineMedicine" Association="NNP_Model.Store.Order_MedicineMedicine">
+      <End Role="Order_Medicine" EntitySet="Order_Medicine" />
+      <End Role="Medicine" EntitySet="Medicines" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Medicines">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="price" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="num_of_stock" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="catagory" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="collect_time" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="total_price" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order_Medicine">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="price" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="quantity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Order_Id" Type="int" Nullable="false" />
+    <Property Name="Medicine_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CustomerOrder">
+    <End Role="Customer" Type="NNP_Model.Store.Customers" Multiplicity="1" />
+    <End Role="Order" Type="NNP_Model.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Order_MedicineOrder">
+    <End Role="Order_Medicine" Type="NNP_Model.Store.Order_Medicine" Multiplicity="*" />
+    <End Role="Order" Type="NNP_Model.Store.Orders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order_Medicine">
+        <PropertyRef Name="Order_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Order_MedicineMedicine">
+    <End Role="Order_Medicine" Type="NNP_Model.Store.Order_Medicine" Multiplicity="*" />
+    <End Role="Medicine" Type="NNP_Model.Store.Medicines" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order_Medicine">
+        <PropertyRef Name="Medicine_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
