@@ -13,8 +13,8 @@ namespace FIT5032_Week08A.Controllers
         public ActionResult Index()
         {
             // Please comment out these codes once you have registered your API key.
-            //EmailSender es = new EmailSender();
-            //es.RegisterAPIKey();
+            EmailSender es = new EmailSender();
+            // es.RegisterAPIKey();
             return View();
         }
 
@@ -34,6 +34,8 @@ namespace FIT5032_Week08A.Controllers
 
         public ActionResult Send_Email()
         {
+            EmailSender es = new EmailSender();
+            es.Send_Async();
             return View(new SendEmailViewModel());
         }
 
