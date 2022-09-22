@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NNP_Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="NNP_ModelStoreContainer">
+    <EntitySet Name="Customers" EntityType="NNP_Model.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Medicines" EntityType="NNP_Model.Store.Medicines" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="NNP_Model.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Order_Medicine" EntityType="NNP_Model.Store.Order_Medicine" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CustomerOrder" Association="NNP_Model.Store.CustomerOrder">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="Order_MedicineOrder" Association="NNP_Model.Store.Order_MedicineOrder">
+      <End Role="Order_Medicine" EntitySet="Order_Medicine" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="Order_MedicineMedicine" Association="NNP_Model.Store.Order_MedicineMedicine">
+      <End Role="Order_Medicine" EntitySet="Order_Medicine" />
+      <End Role="Medicine" EntitySet="Medicines" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Medicines">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="price" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="num_of_stock" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="catagory" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="collect_time" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="total_price" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="status" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order_Medicine">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="price" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="quantity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Order_Id" Type="int" Nullable="false" />
+    <Property Name="Medicine_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CustomerOrder">
+    <End Role="Customer" Type="NNP_Model.Store.Customers" Multiplicity="1" />
+    <End Role="Order" Type="NNP_Model.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Order_MedicineOrder">
+    <End Role="Order_Medicine" Type="NNP_Model.Store.Order_Medicine" Multiplicity="*" />
+    <End Role="Order" Type="NNP_Model.Store.Orders" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order_Medicine">
+        <PropertyRef Name="Order_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Order_MedicineMedicine">
+    <End Role="Order_Medicine" Type="NNP_Model.Store.Order_Medicine" Multiplicity="*" />
+    <End Role="Medicine" Type="NNP_Model.Store.Medicines" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Order_Medicine">
+        <PropertyRef Name="Medicine_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="NNP_Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="NNP_ModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="NNP_Model.Customer" />
+          <EntitySet Name="Medicines" EntityType="NNP_Model.Medicine" />
+          <EntitySet Name="Orders" EntityType="NNP_Model.Order" />
+          <AssociationSet Name="CustomerOrder" Association="NNP_Model.CustomerOrder">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="Order_Medicine" EntityType="NNP_Model.Order_Medicine" />
+          <AssociationSet Name="Order_MedicineOrder" Association="NNP_Model.Order_MedicineOrder">
+            <End Role="Order_Medicine" EntitySet="Order_Medicine" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="Order_MedicineMedicine" Association="NNP_Model.Order_MedicineMedicine">
+            <End Role="Order_Medicine" EntitySet="Order_Medicine" />
+            <End Role="Medicine" EntitySet="Medicines" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" />
+          <Property Name="password" Type="String" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="NNP_Model.CustomerOrder" FromRole="Customer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Medicine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" />
+          <Property Name="price" Type="String" Nullable="false" />
+          <Property Name="num_of_stock" Type="String" Nullable="false" />
+          <Property Name="catagory" Type="String" Nullable="false" />
+          <NavigationProperty Name="Order_Medicine" Relationship="NNP_Model.Order_MedicineMedicine" FromRole="Medicine" ToRole="Order_Medicine" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="collect_time" Type="String" Nullable="false" />
+          <Property Name="total_price" Type="String" Nullable="false" />
+          <Property Name="status" Type="String" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="NNP_Model.CustomerOrder" FromRole="Order" ToRole="Customer" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order_Medicine" Relationship="NNP_Model.Order_MedicineOrder" FromRole="Order" ToRole="Order_Medicine" />
+        </EntityType>
+        <Association Name="CustomerOrder">
+          <End Type="NNP_Model.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="NNP_Model.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Order_Medicine" >
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <NavigationProperty Name="Order" Relationship="NNP_Model.Order_MedicineOrder" FromRole="Order_Medicine" ToRole="Order" />
+          <NavigationProperty Name="Medicine" Relationship="NNP_Model.Order_MedicineMedicine" FromRole="Order_Medicine" ToRole="Medicine" />
+          <Property Name="Id" Type="String" Nullable="false" />
+          <Property Name="price" Type="String" Nullable="false" />
+          <Property Name="quantity" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="Order_MedicineOrder">
+          <End Type="NNP_Model.Order_Medicine" Role="Order_Medicine" Multiplicity="*" />
+          <End Type="NNP_Model.Order" Role="Order" Multiplicity="1" />
+        </Association>
+        <Association Name="Order_MedicineMedicine">
+          <End Type="NNP_Model.Order_Medicine" Role="Order_Medicine" Multiplicity="*" />
+          <End Type="NNP_Model.Medicine" Role="Medicine" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NNP_ModelStoreContainer" CdmEntityContainer="NNP_ModelContainer">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="IsTypeOf(NNP_Model.Customer)">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Medicines">
+      <EntityTypeMapping TypeName="IsTypeOf(NNP_Model.Medicine)">
+        <MappingFragment StoreEntitySet="Medicines">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="num_of_stock" ColumnName="num_of_stock" />
+          <ScalarProperty Name="catagory" ColumnName="catagory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(NNP_Model.Order)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="collect_time" ColumnName="collect_time" />
+          <ScalarProperty Name="total_price" ColumnName="total_price" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_Medicine">
+      <EntityTypeMapping TypeName="IsTypeOf(NNP_Model.Order_Medicine)">
+        <MappingFragment StoreEntitySet="Order_Medicine">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Order_MedicineOrder" TypeName="NNP_Model.Order_MedicineOrder" StoreEntitySet="Order_Medicine">
+      <EndProperty Name="Order">
+        <ScalarProperty Name="Id" ColumnName="Order_Id" />
+      </EndProperty>
+      <EndProperty Name="Order_Medicine">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Order_MedicineMedicine" TypeName="NNP_Model.Order_MedicineMedicine" StoreEntitySet="Order_Medicine">
+      <EndProperty Name="Medicine">
+        <ScalarProperty Name="Id" ColumnName="Medicine_Id" />
+      </EndProperty>
+      <EndProperty Name="Order_Medicine">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
