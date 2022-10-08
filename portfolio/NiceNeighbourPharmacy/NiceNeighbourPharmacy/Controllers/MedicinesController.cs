@@ -12,7 +12,7 @@ namespace NiceNeighbourPharmacy.Controllers
 {
     public class MedicinesController : Controller
     {
-        private NNP_ModelContainer db = new NNP_ModelContainer();
+        private NNPharmacy_Models db = new NNPharmacy_Models();
 
         // GET: Medicines
         public ActionResult Index()
@@ -46,7 +46,7 @@ namespace NiceNeighbourPharmacy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,name,description,price,num_of_stock,catagory")] Medicine medicine)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Category,Price,NumberOfStock")] Medicine medicine)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace NiceNeighbourPharmacy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,name,description,price,num_of_stock,catagory")] Medicine medicine)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Category,Price,NumberOfStock")] Medicine medicine)
         {
             if (ModelState.IsValid)
             {
