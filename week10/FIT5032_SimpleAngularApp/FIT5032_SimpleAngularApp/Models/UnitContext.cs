@@ -7,7 +7,7 @@ namespace FIT5032_SimpleAngularApp.Models
     {
         public UnitContext(DbContextOptions<UnitContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<Unit> Units { get; set; } = null!;

@@ -3,19 +3,17 @@ using FIT5032_SimpleAngularApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(builder =>
-    {
-        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-    });
-});
+
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddCors(options =>
+    options.AddDefaultPolicy(builder =>
+        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+    )
+);
 
+builder.Services.AddControllers();
 builder.Services.AddDbContext<UnitContext>(opt =>
     opt.UseInMemoryDatabase("UnitList"));
 
@@ -32,16 +30,11 @@ if (app.Environment.IsDevelopment())
     // app.UseSwaggerUI();
 }
 
-
-
-
 app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseCors(builder => 
-    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
-);
+app.UseCors();
 
 app.UseAuthorization();
 

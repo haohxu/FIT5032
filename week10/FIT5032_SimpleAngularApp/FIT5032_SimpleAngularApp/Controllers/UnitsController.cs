@@ -6,11 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using FIT5032_SimpleAngularApp.Models;
-using Microsoft.AspNetCore.Cors;
 
 namespace FIT5032_SimpleAngularApp.Controllers
 {
-    [EnableCors]
     [Route("api/[controller]")]
     [ApiController]
     public class UnitsController : ControllerBase
@@ -23,33 +21,21 @@ namespace FIT5032_SimpleAngularApp.Controllers
         }
 
         // GET: api/Units
-        // [HttpGet]
-        // public async Task<ActionResult<IEnumerable<Unit>>> GetUnits()
-        // {
-        //     return await _context.Units.ToListAsync();
-        // }
-
-        // GET: api/Units
-        [EnableCors]
         [HttpGet]
-        public ActionResult<IEnumerable<Unit>> GetUnits()
+        public async Task<ActionResult<IEnumerable<Unit>>> GetUnits()
         {
-            return new []
-            {
-                new Unit { Id = "001", UnitCode = "FIT5032", UnitName = "Web Application Development"}
-            };
+            return await _context.Units.ToListAsync();
         }
 
         // GET: api/Units/5
-        [EnableCors]
         [HttpGet("{id}")]
-        public async Task<ActionResult<Unit>> GetUnit(string id)
+        public async Task<ActionResult<Unit>> GetUnit(int id)
         {
             var unit = await _context.Units.FindAsync(id);
 
             if (unit == null)
             {
-                return new Unit { Id = "001", UnitCode = "FIT5032", UnitName = "Web Application Development"};
+                return NotFound();
             }
 
             return unit;
@@ -57,9 +43,8 @@ namespace FIT5032_SimpleAngularApp.Controllers
 
         // PUT: api/Units/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [EnableCors]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUnit(string id, Unit unit)
+        public async Task<IActionResult> PutUnit(int id, Unit unit)
         {
             if (id != unit.Id)
             {
@@ -89,17 +74,18 @@ namespace FIT5032_SimpleAngularApp.Controllers
 
         // POST: api/Units
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [EnableCors]
         [HttpPost]
-        public void PostUnit(Unit unit)
+        public async Task<ActionResult<Unit>> PostUnit(Unit unit)
         {
-            return;
+            _context.Units.Add(unit);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUnit", new { id = unit.Id }, unit);
         }
 
         // DELETE: api/Units/5
-        [EnableCors]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUnit(string id)
+        public async Task<IActionResult> DeleteUnit(int id)
         {
             var unit = await _context.Units.FindAsync(id);
             if (unit == null)
@@ -113,7 +99,7 @@ namespace FIT5032_SimpleAngularApp.Controllers
             return NoContent();
         }
 
-        private bool UnitExists(string id)
+        private bool UnitExists(int id)
         {
             return _context.Units.Any(e => e.Id == id);
         }

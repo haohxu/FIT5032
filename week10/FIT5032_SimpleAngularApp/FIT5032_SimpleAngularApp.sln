@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIT5032_SimpleAngularApp", "FIT5032_SimpleAngularApp\FIT5032_SimpleAngularApp.csproj", "{B8F9B707-3AD1-4EE6-9FAB-4ACE8FB0DF3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIT5032_SimpleAngularApp", "FIT5032_SimpleAngularApp\FIT5032_SimpleAngularApp.csproj", "{BA8AC0B2-5CB8-4A22-9289-E64EE50737F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B8F9B707-3AD1-4EE6-9FAB-4ACE8FB0DF3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8F9B707-3AD1-4EE6-9FAB-4ACE8FB0DF3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8F9B707-3AD1-4EE6-9FAB-4ACE8FB0DF3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8F9B707-3AD1-4EE6-9FAB-4ACE8FB0DF3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA8AC0B2-5CB8-4A22-9289-E64EE50737F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA8AC0B2-5CB8-4A22-9289-E64EE50737F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA8AC0B2-5CB8-4A22-9289-E64EE50737F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA8AC0B2-5CB8-4A22-9289-E64EE50737F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {89554A08-AD10-4708-9F25-CCF6054DC711}
+		SolutionGuid = {D6FB08C9-A8FA-4757-898D-7C299FC3E328}
 	EndGlobalSection
 EndGlobal

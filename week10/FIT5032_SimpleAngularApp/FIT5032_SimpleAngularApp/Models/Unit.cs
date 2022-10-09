@@ -2,7 +2,7 @@
 {
     public class Unit
     {
-        public string? Id { get; set; }
+        public int Id { get; set; }
         public string? UnitName { get; set; }
         public string? UnitCode { get; set; }
     }
