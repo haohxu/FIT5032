@@ -14,10 +14,10 @@ namespace NiceNeighbourPharmacy.Models
 
         public string RatingComment { get; set; }
 
-        public int RatingStatus { get; set; }
+        public string RatingStatus { get; set; }
 
-        public int OrderMedicineId { get; set; }
+        public int OrderDetailId { get; set; }
 
-        public virtual OrdersMedicine OrdersMedicine { get; set; }
+        public virtual OrderDetail OrderDetail { get; set; }
     }
 }

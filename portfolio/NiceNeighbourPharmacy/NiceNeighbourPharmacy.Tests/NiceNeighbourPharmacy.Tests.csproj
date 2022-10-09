@@ -6,7 +6,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DA69DC5F-BB2D-4251-9327-9203FCDAE06E}</ProjectGuid>
+    <ProjectGuid>{DC8DF743-E43C-4D8A-8C86-40D27D4447BE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NiceNeighbourPharmacy.Tests</RootNamespace>
@@ -100,7 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NiceNeighbourPharmacy\NiceNeighbourPharmacy.csproj">
-      <Project>{299FDA36-3CF6-4B13-AD09-791895D37945}</Project>
+      <Project>{6BF8A777-BD46-4782-B6A4-5A95D9A773CC}</Project>
       <Name>NiceNeighbourPharmacy</Name>
     </ProjectReference>
   </ItemGroup>
