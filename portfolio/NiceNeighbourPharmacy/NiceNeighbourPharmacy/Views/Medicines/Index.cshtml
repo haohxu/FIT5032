@@ -5,11 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+
 <h2>Index</h2>
 
 <p>
     @if (User.IsInRole("Pharmacist"))
-    { 
+    {
         @Html.ActionLink("Create New", "Create")
     }
 </p>
@@ -23,8 +25,8 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
@@ -35,8 +37,8 @@
                 @Html.DisplayNameFor(model => model.AvgRatings)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.Notes)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.Notes)
+                </th>*@
             <th></th>
         </tr>
     </thead>
@@ -52,8 +54,8 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 @*<td>
-                    @Html.DisplayFor(modelItem => item.Category)
-                </td>*@
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
@@ -64,8 +66,8 @@
                     @Html.DisplayFor(modelItem => item.AvgRatings)
                 </td>
                 @*<td>
-                    @Html.DisplayFor(modelItem => item.Notes)
-                </td>*@
+                        @Html.DisplayFor(modelItem => item.Notes)
+                    </td>*@
                 <td>
                     @if (User.IsInRole("Customer"))
                     {
@@ -81,9 +83,7 @@
     </tbody>
 </table>
 @section Scripts {
-    
-    @Scripts.Render("~/Scripts/DataTables/jquery.dataTables.js")
-    @Scripts.Render("~/Scripts/DataTables/dataTables.bootstrap.js")
+    @Scripts.Render("~/bundles/data_tables")
 
     <script>
         $(document).ready(function () {
@@ -91,4 +91,4 @@
         });
     </script>
 }
-<link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+
