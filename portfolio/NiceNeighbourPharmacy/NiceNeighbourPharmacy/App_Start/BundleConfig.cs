@@ -22,6 +22,11 @@ namespace NiceNeighbourPharmacy
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            // Start - Add new bundles
+            bundles.Add(new ScriptBundle("~/bundles/mapbox").Include(
+                "~/Scripts/my_maps_mapbox.js"));
+            // End -----
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));

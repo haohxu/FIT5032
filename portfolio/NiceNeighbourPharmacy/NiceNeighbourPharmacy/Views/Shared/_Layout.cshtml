@@ -7,6 +7,15 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    @*Start - Add more resources*@
+    @*Add MapBox GL JS*@
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css' rel='stylesheet' />
+
+    @*Add MapBox*@
+
+    @*End -----*@
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,6 +37,7 @@
                     {
                         <li>@Html.ActionLink("Medicines", "Index", "Medicines")</li>
                         <li>@Html.ActionLink("e-Trolley", "Index", "TrolleyItems")</li>
+                        <li>@Html.ActionLink("Maps", "Index", "Locations")</li>
 
                     }
                 </ul>

@@ -6,7 +6,9 @@
 }
 
 <h2>Index</h2>
-
+<div id="map" style="width:400px; height:300px;">
+    <p> <br /> </p>
+</div>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -62,3 +64,6 @@
 }
 
 </table>
+@section Scripts {
+    @Scripts.Render("~/bundles/mapbox")    
+}
