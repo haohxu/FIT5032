@@ -6,7 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using NiceNeighbourPharmacy.Models;
+using NiceNeighbourPharmacy.Utils;
 
 namespace NiceNeighbourPharmacy.Controllers
 {
@@ -34,6 +37,60 @@ namespace NiceNeighbourPharmacy.Controllers
             }
             return View(order);
         }
+
+        // Start - 
+        // GET: Orders/Create
+        public ActionResult SendGroupEmail()
+        {
+            
+            var orders = db.Orders.Where(t =>
+                t.Status == "Ready to Collect"
+            );
+
+            SendGroupEmailViewModel sendGroupEmailViewModel = new SendGroupEmailViewModel();
+            sendGroupEmailViewModel.Orders = orders;
+
+            return View(sendGroupEmailViewModel);
+        }
+
+        // POST: Orders/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SendGroupEmail([Bind(Include = "Subject,Contents")] SendGroupEmailViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var manager = new UserManager<ApplicationUser>(
+                    new UserStore<ApplicationUser>(
+                        new ApplicationDbContext()));
+
+                var orders = db.Orders.Where(t =>
+                    t.Status == "Ready to Collect"
+                );
+
+                try
+                {
+                    foreach (var order in orders)
+                    {
+                        string toEmail = manager.FindById(order.CustomerId).Email;
+                        string subject = model.Subject;
+                        string contents = model.Contents;
+
+                        SendEmailUtil.Execute(subject, contents, toEmail).Wait();
+                    }
+                }
+                catch
+                {
+                    return View();
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+        // End -----
 
         // GET: Orders/Create
         public ActionResult Create()

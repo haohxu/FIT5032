@@ -87,7 +87,6 @@ C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\Ni
 C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\System.Web.WebPages.xml
 C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\System.Web.WebPages.Deployment.xml
 C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\System.Web.WebPages.Razor.xml
-C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\Newtonsoft.Json.xml
 C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\Antlr3.Runtime.pdb
 C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\System.Net.Http.Formatting.xml
 C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\System.Web.Http.xml
@@ -121,3 +120,7 @@ C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\Ni
 C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\Microsoft.AspNet.SignalR.Core.xml
 C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
 C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\SendGrid.dll
+C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\StarkbankEcdsa.dll
+C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\SendGrid.pdb
+C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\SendGrid.xml
