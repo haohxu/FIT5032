@@ -54,7 +54,8 @@
     }
 </table>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("SendGroupEmail", "Orders", FormMethod.Post, 
+    new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -80,8 +81,15 @@
         </div>
 
         <div class="form-group">
+            <label class="control-label col-md-2" for="Name">Upload Attachment</label>
+            <div class="col-md-10">
+                <input type="file" name="postedFile" class="btn btn-default" accept="image/png, application/pdf" />
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Send Group Email" class="btn btn-primary" />
             </div>
         </div>
     </div>

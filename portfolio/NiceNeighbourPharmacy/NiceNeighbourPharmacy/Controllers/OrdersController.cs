@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -58,10 +59,24 @@ namespace NiceNeighbourPharmacy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SendGroupEmail([Bind(Include = "Subject,Contents")] SendGroupEmailViewModel model)
+        public ActionResult SendGroupEmail(
+            [Bind(Include = "Subject,Contents")] SendGroupEmailViewModel model, 
+            HttpPostedFileBase postedFile)
         {
+            
+            
             if (ModelState.IsValid)
             {
+
+                string serverFolderPath = Server.MapPath("~/Uploads/" + User.Identity.GetUserId() + "/");
+                // string serverFolderPath = Server.MapPath("~/Uploads/");
+                if (!Directory.Exists(serverFolderPath))
+                    Directory.CreateDirectory(serverFolderPath);
+                string uniqueFileName = string.Format(@"{0}", Guid.NewGuid()) + Path.GetExtension(postedFile.FileName);
+                string fullFilePath = serverFolderPath + uniqueFileName;
+
+                postedFile.SaveAs(fullFilePath);
+
                 var manager = new UserManager<ApplicationUser>(
                     new UserStore<ApplicationUser>(
                         new ApplicationDbContext()));
@@ -69,6 +84,7 @@ namespace NiceNeighbourPharmacy.Controllers
                 var orders = db.Orders.Where(t =>
                     t.Status == "Ready to Collect"
                 );
+
 
                 try
                 {
@@ -78,7 +94,7 @@ namespace NiceNeighbourPharmacy.Controllers
                         string subject = model.Subject;
                         string contents = model.Contents;
 
-                        SendEmailUtil.Execute(subject, contents, toEmail).Wait();
+                        SendEmailUtil.Execute(subject, contents, toEmail, fullFilePath);
                     }
                 }
                 catch

@@ -166,6 +166,10 @@ namespace NiceNeighbourPharmacy.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    // Start - Default assign role as customer
+                    var roleResult = UserManager.AddToRole(user.Id, "Customer");
+                    // End -----
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
