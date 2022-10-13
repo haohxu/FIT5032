@@ -38,12 +38,13 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Live Chat", "LiveChat", "Home")</li>
                     <li>@Html.ActionLink("Maps", "Index", "Locations")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Medicines", "Index", "Medicines")</li>
+                        <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
                         <li>@Html.ActionLink("e-Trolley", "Index", "TrolleyItems")</li>
-
 
                     }
                 </ul>

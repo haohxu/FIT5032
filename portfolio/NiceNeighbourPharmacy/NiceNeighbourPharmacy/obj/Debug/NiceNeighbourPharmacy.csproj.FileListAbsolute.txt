@@ -115,3 +115,9 @@ C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\Ni
 C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\obj\Debug\NiceNeighbourPharmacy.Migrations.InitialCreate.resources
 C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\obj\Debug\NiceNeighbourPharmacy.csproj.GenerateResource.cache
 C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\obj\Debug\NiceNeighbourPharmacy.Migrations.Birthdate.resources
+C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\Microsoft.AspNet.SignalR.Core.pdb
+C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+C:\Files\Monash\2022S2\FIT5032\source\FIT5032\portfolio\NiceNeighbourPharmacy\NiceNeighbourPharmacy\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
