@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace NiceNeighbourPharmacy.Models
@@ -8,6 +9,20 @@ namespace NiceNeighbourPharmacy.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        // Start - Add customized identity columns
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Date of Birth")]
+        public DateTime DateOfBirth { get; set; }
+        // End -----
     }
 
     public class ExternalLoginListViewModel
@@ -79,6 +94,20 @@ namespace NiceNeighbourPharmacy.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        // Start - Add customized identity columns
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Date of Birth")]
+        public DateTime DateOfBirth { get; set; }
+        // End -----
     }
 
     public class ResetPasswordViewModel

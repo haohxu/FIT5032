@@ -1,0 +1,85 @@
+﻿@model NiceNeighbourPharmacy.Models.Medicine
+
+@{
+    ViewBag.Title = "Add to Trolley";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add item to Trolley</h2>
+
+<h3>Confirm add this item to your Trolley</h3>
+<div>
+    <h4>Medicine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfStock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfStock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvgRatings)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvgRatings)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Add to Trolley" class="btn btn-default" /> |
+            @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+
+</div>
+

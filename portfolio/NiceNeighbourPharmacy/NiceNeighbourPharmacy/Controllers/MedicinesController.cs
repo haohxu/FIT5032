@@ -6,19 +6,56 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using NiceNeighbourPharmacy.Models;
 
 namespace NiceNeighbourPharmacy.Controllers
 {
     public class MedicinesController : Controller
     {
-        private NNPharmacy_Models db = new NNPharmacy_Models();
+        private NNPharmacyModels db = new NNPharmacyModels();
 
         // GET: Medicines
         public ActionResult Index()
         {
             return View(db.Medicines.ToList());
         }
+
+        // Start - Add to Trolley
+        // GET: Medicines/AddToTrolley/5
+        public ActionResult AddToTrolley(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Medicine medicine = db.Medicines.Find(id);
+            if (medicine == null)
+            {
+                return HttpNotFound();
+            }
+            return View(medicine);
+        }
+
+        // POST: Medicines/AddToTrolley/5
+        [HttpPost, ActionName("AddToTrolley")]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddToTrolleyConfirmed(int id)
+        {
+            Medicine medicine = db.Medicines.Find(id);
+            
+            TrolleyItem item = new TrolleyItem();
+            item.CustomerId = User.Identity.GetUserId();
+            item.Quantity = 1;  // TODO: change Quantity later
+            item.Price = medicine.Price;
+            item.MedicineId = medicine.Id;
+            db.TrolleyItems.Add(item);
+
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+        // End -----
 
         // GET: Medicines/Details/5
         public ActionResult Details(int? id)
@@ -46,7 +83,7 @@ namespace NiceNeighbourPharmacy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Category,Price,NumberOfStock")] Medicine medicine)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Category,Price,NumberOfStock,AvgRatings,Notes")] Medicine medicine)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +115,7 @@ namespace NiceNeighbourPharmacy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Category,Price,NumberOfStock")] Medicine medicine)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Category,Price,NumberOfStock,AvgRatings,Notes")] Medicine medicine)
         {
             if (ModelState.IsValid)
             {

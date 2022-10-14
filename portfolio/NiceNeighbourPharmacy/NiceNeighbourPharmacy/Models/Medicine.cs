@@ -11,8 +11,8 @@ namespace NiceNeighbourPharmacy.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Medicine()
         {
-            OrdersMedicines = new HashSet<OrdersMedicine>();
-            ShoppingCartRecords = new HashSet<ShoppingCartRecord>();
+            OrderDetails = new HashSet<OrderDetail>();
+            TrolleyItems = new HashSet<TrolleyItem>();
         }
 
         public int Id { get; set; }
@@ -20,20 +20,22 @@ namespace NiceNeighbourPharmacy.Models
         [Required]
         public string Name { get; set; }
 
-        [Required]
         public string Description { get; set; }
 
-        [Required]
         public string Category { get; set; }
 
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
-        public int NumberOfStock { get; set; }
+        public int? NumberOfStock { get; set; }
+
+        public decimal? AvgRatings { get; set; }
+
+        public string Notes { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrdersMedicine> OrdersMedicines { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShoppingCartRecord> ShoppingCartRecords { get; set; }
+        public virtual ICollection<TrolleyItem> TrolleyItems { get; set; }
     }
 }

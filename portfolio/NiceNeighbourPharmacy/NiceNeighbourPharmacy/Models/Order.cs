@@ -11,7 +11,8 @@ namespace NiceNeighbourPharmacy.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            OrdersMedicines = new HashSet<OrdersMedicine>();
+            Events = new HashSet<Event>();
+            OrderDetails = new HashSet<OrderDetail>();
         }
 
         public int Id { get; set; }
@@ -19,21 +20,22 @@ namespace NiceNeighbourPharmacy.Models
         [Column(TypeName = "numeric")]
         public decimal TotalPrice { get; set; }
 
-        [Required]
         public string Status { get; set; }
 
         [Column(TypeName = "date")]
-        public DateTime CollectDateTime { get; set; }
+        public DateTime? CollectDateTime { get; set; }
 
-        public int CustomerId { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string CustomerId { get; set; }
 
-        public int? PharmacistId { get; set; }
-
-        public virtual Customer Customer { get; set; }
-
-        public virtual Pharmacist Pharmacist { get; set; }
+        [StringLength(128)]
+        public string PharmacistId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrdersMedicine> OrdersMedicines { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

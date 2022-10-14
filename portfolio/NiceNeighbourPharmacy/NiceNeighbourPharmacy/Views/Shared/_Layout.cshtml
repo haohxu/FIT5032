@@ -7,6 +7,20 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    @*Start - Add more resources*@
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css' rel='stylesheet' />
+
+    @*Add MapBox GL Geocoder plugin*@
+    <!-- Load the `mapbox-gl-geocoder` plugin. -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+
+    @*Add MapBox GL Direction plugin*@
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">
+    @*End -----*@
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -24,14 +38,15 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
-                    <!-- Add components here -->
-                    <li>@Html.ActionLink("Medicines", "Index", "Medicines")</li>
+                    <li>@Html.ActionLink("Live Chat", "LiveChat", "Home")</li>
+                    <li>@Html.ActionLink("Maps", "Index", "Locations")</li>
                     @if (User.Identity.IsAuthenticated)
-                    { 
-                        <li>@Html.ActionLink("Shopping Cart", "Index", "ShoppingCartRecords")</li>
+                    {
+                        <li>@Html.ActionLink("Medicines", "Index", "Medicines")</li>
+                        <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                        <li>@Html.ActionLink("e-Trolley", "Index", "TrolleyItems")</li>
+
                     }
-                    <!-- End -->
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

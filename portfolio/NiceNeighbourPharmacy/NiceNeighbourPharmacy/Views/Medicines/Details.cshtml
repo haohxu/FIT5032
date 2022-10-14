@@ -51,17 +51,25 @@
             @Html.DisplayFor(model => model.NumberOfStock)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.AvgRatings)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvgRatings)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
-
-<!-- add to cart -->
-<p>
-    <a class="btn btn-default" 
-       href="https://go.microsoft.com/fwlink/?LinkId=301865"
-       >Add to Shopping Cart &raquo;</a>
-
 </p>

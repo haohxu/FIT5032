@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace NiceNeighbourPharmacy.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -15,15 +16,20 @@ namespace NiceNeighbourPharmacy.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Nice Neighbor Pharmacy Description";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Nice Neighbor Pharmacy Contacts";
 
+            return View();
+        }
+
+        public ActionResult LiveChat()
+        {
             return View();
         }
     }

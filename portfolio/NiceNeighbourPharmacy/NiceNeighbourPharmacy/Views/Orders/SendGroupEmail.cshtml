@@ -1,0 +1,100 @@
+﻿@model NiceNeighbourPharmacy.Models.SendGroupEmailViewModel
+
+@{
+    ViewBag.Title = "SendGroupEmail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SendGroupEmail</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TotalPrice)*@
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Status)*@
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.CollectDateTime)*@
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.CustomerId)*@
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.PharmacistId)*@
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Orders)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CollectDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PharmacistId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
+
+@using (Html.BeginForm("SendGroupEmail", "Orders", FormMethod.Post, 
+    new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Order</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Contents, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Contents, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Contents, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Name">Upload Attachment</label>
+            <div class="col-md-10">
+                <input type="file" name="postedFile" class="btn btn-default" accept="image/png, application/pdf" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Send Group Email" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

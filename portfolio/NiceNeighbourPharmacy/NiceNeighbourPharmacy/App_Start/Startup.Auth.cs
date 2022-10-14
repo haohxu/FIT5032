@@ -58,11 +58,13 @@ namespace NiceNeighbourPharmacy
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            // Start - Add Google Auth
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "490974024651-ljp46l29kc6jgmirc6ok7e2pgoicbcdp.apps.googleusercontent.com",
+                ClientSecret = "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"
+            });
+            // End -----
         }
     }
 }
