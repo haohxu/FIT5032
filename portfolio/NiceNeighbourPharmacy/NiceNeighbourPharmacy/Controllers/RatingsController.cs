@@ -86,8 +86,44 @@ namespace NiceNeighbourPharmacy.Controllers
         {
             if (ModelState.IsValid)
             {
+                var currentOrderDetail = db.OrderDetails.Find(rating.OrderDetailId);
+                var currentMedicine = db.Medicines.Find(currentOrderDetail.MedicineId);
+
+                int theMedicineId = currentMedicine.Id;
+                decimal? theRatingScore = rating.RatingScore;
+
                 db.Entry(rating).State = EntityState.Modified;
                 db.SaveChanges();
+
+                // Start - Add Rating Function
+                Medicine medicineToUpdate = db.Medicines.FirstOrDefault(m => 
+                    m.Id == theMedicineId
+                );
+                decimal? avgScore = 0;
+                if (medicineToUpdate.AvgRatings == null)
+                {
+                    avgScore = theRatingScore;
+                    
+                }
+                else
+                {
+                    var ratings = db.Ratings.Where(s =>
+                        s.OrderDetail.MedicineId == medicineToUpdate.Id &&
+                        s.RatingScore != null
+                    );
+                    decimal? sumScore = 0;
+                    foreach (var item in ratings)
+                    {
+                        sumScore = sumScore + item.RatingScore;
+                    }
+                    avgScore = sumScore / ratings.Count();
+                    
+                }
+                medicineToUpdate.AvgRatings = avgScore;
+                db.Entry(medicineToUpdate).State = EntityState.Modified;
+                db.SaveChanges();
+                // End -----
+
                 return RedirectToAction("Index");
             }
             ViewBag.OrderDetailId = new SelectList(db.OrderDetails, "Id", "Id", rating.OrderDetailId);

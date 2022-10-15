@@ -59,11 +59,26 @@ namespace NiceNeighbourPharmacy.Controllers
             // var currentUser = 
             var currentUserId = User.Identity.GetUserId();
 
+            var items = db.TrolleyItems.Where(s =>
+                s.CustomerId == currentUserId
+            ).ToList();
+
+            decimal totalPrice = 0;
+            foreach (var item in items)
+            {
+                if (item.Price != null && item.Quantity != null)
+                {
+                    totalPrice = (decimal)(totalPrice + (item.Price * item.Quantity));
+                }
+                else { continue; }
+            }
+
             // Process: Order entity
             Order newOrder = new Order();
             newOrder.Status = "Ready to Collect";
             newOrder.CustomerId = currentUserId;
             newOrder.CollectDateTime = collectDateTime;
+            newOrder.TotalPrice = totalPrice;
             Order insertedOrder = db.Orders.Add(newOrder);
             db.SaveChanges();
 
@@ -78,9 +93,7 @@ namespace NiceNeighbourPharmacy.Controllers
             db.SaveChanges();
 
             // Process: OrderDetail and Rating entities
-            var items = db.TrolleyItems.Where(s =>
-                s.CustomerId == currentUserId
-            ).ToList();
+            
 
             foreach (var item in items)
             {
