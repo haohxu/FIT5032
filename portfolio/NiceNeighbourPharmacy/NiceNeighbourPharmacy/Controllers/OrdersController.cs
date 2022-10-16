@@ -14,6 +14,7 @@ using NiceNeighbourPharmacy.Utils;
 
 namespace NiceNeighbourPharmacy.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private NNPharmacyModels db = new NNPharmacyModels();
@@ -21,7 +22,25 @@ namespace NiceNeighbourPharmacy.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            return View(db.Orders.ToList());
+            var currentUserId = User.Identity.GetUserId();
+            IQueryable<Order> orders = null;
+            if (User.IsInRole("Customer"))
+            {
+                orders = db.Orders
+                    .OrderByDescending(t => t.Status)
+                    .Where(t => t.CustomerId == currentUserId);
+            }
+            else if (User.IsInRole("Pharmacist"))
+            {
+                orders = db.Orders
+                    .OrderByDescending(t => t.CollectDateTime);
+            }
+            else
+            {
+                orders = db.Orders
+                    .OrderByDescending(t => t.CollectDateTime);
+            }
+            return View(orders.ToList());
         }
 
         // GET: Orders/Details/5
@@ -31,12 +50,28 @@ namespace NiceNeighbourPharmacy.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
             Order order = db.Orders.Find(id);
             if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+            
+            // get current user
+            var manager = new UserManager<ApplicationUser>(
+                new UserStore<ApplicationUser>(
+                    new ApplicationDbContext()));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+
+            // get orderDetails
+            var orderDetails = db.OrderDetails.Where(t => t.OrderId == order.Id);
+
+            DetailedOrderViewModel dovm = new DetailedOrderViewModel();
+            dovm.TheOrder = order;
+            dovm.CustomerName = currentUser.LastName + ", " + currentUser.FirstName;
+            dovm.OrderDetails = orderDetails;
+
+            return View(dovm);
         }
 
         // Start - 
@@ -108,30 +143,31 @@ namespace NiceNeighbourPharmacy.Controllers
         }
         // End -----
 
-        // GET: Orders/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //// GET: Orders/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: Orders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,TotalPrice,Status,CollectDateTime,CustomerId,PharmacistId")] Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Orders.Add(order);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: Orders/Create
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,TotalPrice,Status,CollectDateTime,CustomerId,PharmacistId")] Order order)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Orders.Add(order);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(order);
-        }
+        //    return View(order);
+        //}
 
         // GET: Orders/Edit/5
+        [Authorize(Roles = "Pharmacist")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -151,6 +187,7 @@ namespace NiceNeighbourPharmacy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Pharmacist")]
         public ActionResult Edit([Bind(Include = "Id,TotalPrice,Status,CollectDateTime,CustomerId,PharmacistId")] Order order)
         {
             if (ModelState.IsValid)
@@ -163,6 +200,7 @@ namespace NiceNeighbourPharmacy.Controllers
         }
 
         // GET: Orders/Delete/5
+        [Authorize(Roles = "Pharmacist")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -180,6 +218,7 @@ namespace NiceNeighbourPharmacy.Controllers
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Pharmacist")]
         public ActionResult DeleteConfirmed(int id)
         {
             Order order = db.Orders.Find(id);

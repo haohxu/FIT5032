@@ -11,12 +11,12 @@ using NiceNeighbourPharmacy.Models;
 
 namespace NiceNeighbourPharmacy.Controllers
 {
+    [Authorize(Roles = "Customer")]
     public class TrolleyItemsController : Controller
     {
         private NNPharmacyModels db = new NNPharmacyModels();
 
         // GET: TrolleyItems
-        [Authorize(Roles = "Customer")]
         public ActionResult Index()
         {
             // var trolleyItems = db.TrolleyItems.Include(t => t.Medicine);
@@ -31,7 +31,6 @@ namespace NiceNeighbourPharmacy.Controllers
         // Start -
 
         // GET: TrolleyItems/Confirm
-        [Authorize(Roles = "Customer")]
         public ActionResult Confirm()
         {
             // var trolleyItems = db.TrolleyItems.Include(t => t.Medicine);
@@ -51,7 +50,6 @@ namespace NiceNeighbourPharmacy.Controllers
         // POST: TrolleyItems/Confirm
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Customer")]
         public ActionResult Confirm([Bind(Include = "CollectDateTime")] ConfirmOrderViewModel model)
         {
             DateTime collectDateTime = model.CollectDateTime;
@@ -136,44 +134,44 @@ namespace NiceNeighbourPharmacy.Controllers
         // End -----
 
         // GET: TrolleyItems/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            TrolleyItem trolleyItem = db.TrolleyItems.Find(id);
-            if (trolleyItem == null)
-            {
-                return HttpNotFound();
-            }
-            return View(trolleyItem);
-        }
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    TrolleyItem trolleyItem = db.TrolleyItems.Find(id);
+        //    if (trolleyItem == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(trolleyItem);
+        //}
 
-        // GET: TrolleyItems/Create
-        public ActionResult Create()
-        {
-            ViewBag.MedicineId = new SelectList(db.Medicines, "Id", "Name");
-            return View();
-        }
+        //// GET: TrolleyItems/Create
+        //public ActionResult Create()
+        //{
+        //    ViewBag.MedicineId = new SelectList(db.Medicines, "Id", "Name");
+        //    return View();
+        //}
 
-        // POST: TrolleyItems/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Quantity,Price,MedicineId,CustomerId")] TrolleyItem trolleyItem)
-        {
-            if (ModelState.IsValid)
-            {
-                db.TrolleyItems.Add(trolleyItem);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //// POST: TrolleyItems/Create
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,Quantity,Price,MedicineId,CustomerId")] TrolleyItem trolleyItem)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.TrolleyItems.Add(trolleyItem);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            ViewBag.MedicineId = new SelectList(db.Medicines, "Id", "Name", trolleyItem.MedicineId);
-            return View(trolleyItem);
-        }
+        //    ViewBag.MedicineId = new SelectList(db.Medicines, "Id", "Name", trolleyItem.MedicineId);
+        //    return View(trolleyItem);
+        //}
 
         // GET: TrolleyItems/Edit/5
         public ActionResult Edit(int? id)

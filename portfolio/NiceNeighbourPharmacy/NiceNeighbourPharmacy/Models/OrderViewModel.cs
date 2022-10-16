@@ -29,5 +29,12 @@ namespace NiceNeighbourPharmacy.Models
 
         //public bool RememberMe { get; set; }
     }
+
+    public class DetailedOrderViewModel
+    {
+        public string CustomerName { get; set; }
+        public Order TheOrder { get; set; }
+        public IEnumerable<OrderDetail> OrderDetails { get; set; }
+    }
     // End -----
 }

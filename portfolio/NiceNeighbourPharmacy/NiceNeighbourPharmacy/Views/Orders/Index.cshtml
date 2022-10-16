@@ -8,9 +8,12 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
-    |
-    @Html.ActionLink("Send Group Notification Emails", "SendGroupEmail")
+    @*@Html.ActionLink("Create New", "Create")*@
+    @if (User.IsInRole("Pharmacist"))
+    {
+        @Html.ActionLink("Send Group Notification Emails", "SendGroupEmail")
+    }
+
 </p>
 <table class="table">
     <tr>
@@ -23,12 +26,15 @@
         <th>
             @Html.DisplayNameFor(model => model.CollectDateTime)
         </th>
+        @if (User.IsInRole("Pharmacist"))
+        {
         <th>
             @Html.DisplayNameFor(model => model.CustomerId)
         </th>
-        <th>
+        }
+        @*<th>
             @Html.DisplayNameFor(model => model.PharmacistId)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -43,16 +49,21 @@
         <td>
             @Html.DisplayFor(modelItem => item.CollectDateTime)
         </td>
+        @if (User.IsInRole("Pharmacist")) {
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>}
+            @*<td>
+                @Html.DisplayFor(modelItem => item.PharmacistId)
+            </td>*@
         <td>
-            @Html.DisplayFor(modelItem => item.CustomerId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PharmacistId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @if (User.IsInRole("Pharmacist"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            }
         </td>
     </tr>
 }

@@ -22,7 +22,7 @@ namespace NiceNeighbourPharmacy.Models
 
         public string Status { get; set; }
 
-        [Column(TypeName = "date")]
+        [Column(TypeName = "datetime")]
         public DateTime? CollectDateTime { get; set; }
 
         [Required]
