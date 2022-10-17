@@ -10,6 +10,8 @@
 </div>
 
 <div class="row">
+    @if (!User.Identity.IsAuthenticated)
+    {
     <div class="col-md-4">
         <h2>Please Login First</h2>
         <p>
@@ -17,6 +19,7 @@
         </p>
         <p></p>
     </div>
+    }
     <div class="col-md-4">
         <h2>What to see our location?</h2>
         <p></p>

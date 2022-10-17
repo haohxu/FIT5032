@@ -98,8 +98,6 @@ namespace NiceNeighbourPharmacy.Controllers
             [Bind(Include = "Subject,Contents")] SendGroupEmailViewModel model, 
             HttpPostedFileBase postedFile)
         {
-            
-            
             if (ModelState.IsValid)
             {
 
