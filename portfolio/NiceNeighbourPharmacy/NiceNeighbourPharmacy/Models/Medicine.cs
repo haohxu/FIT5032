@@ -18,13 +18,17 @@ namespace NiceNeighbourPharmacy.Models
         public int Id { get; set; }
 
         [Required]
+        [StringLength(100)]
         public string Name { get; set; }
+        
         [Required]
+        [StringLength(500)]
         public string Description { get; set; }
         
         public string Category { get; set; }
+        
         [Required]
-        [Range(0.001, double.MaxValue, ErrorMessage = "Price must be positive decimal")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Price must be positive decimal")]
         public decimal? Price { get; set; }
 
         [Required]

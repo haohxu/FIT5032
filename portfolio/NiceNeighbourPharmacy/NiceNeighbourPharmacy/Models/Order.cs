@@ -18,8 +18,10 @@ namespace NiceNeighbourPharmacy.Models
         public int Id { get; set; }
 
         [Column(TypeName = "numeric")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Price should be non-negative decimal")]
         public decimal TotalPrice { get; set; }
 
+        [StringLength(100)]
         public string Status { get; set; }
 
         [Column(TypeName = "datetime")]
