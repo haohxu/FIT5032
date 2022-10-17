@@ -68,15 +68,18 @@
                 @*<td>
                         @Html.DisplayFor(modelItem => item.Notes)
                     </td>*@
-                <td>
-                    @if (User.IsInRole("Customer"))
-                    {
-                        @Html.ActionLink("Add To Trolley", "AddToTrolley", new { id = item.Id })
-                    } |
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            <td>
+                @if (User.IsInRole("Customer"))
+                {
+                    @Html.ActionLink("Add To Trolley", "AddToTrolley", new { id = item.Id })
+                } |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @if (User.IsInRole("Pharmacist")) 
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
+                }
+            </td>
             </tr>
         }
 

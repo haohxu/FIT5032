@@ -11,6 +11,7 @@ using NiceNeighbourPharmacy.Models;
 
 namespace NiceNeighbourPharmacy.Controllers
 {
+    [Authorize]
     public class MedicinesController : Controller
     {
         private NNPharmacyModels db = new NNPharmacyModels();
@@ -42,17 +43,31 @@ namespace NiceNeighbourPharmacy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddToTrolleyConfirmed(int id)
         {
-            Medicine medicine = db.Medicines.Find(id);
+            var currentCustomerId = User.Identity.GetUserId();
             
-            TrolleyItem item = new TrolleyItem();
-            item.CustomerId = User.Identity.GetUserId();
-            item.Quantity = 1;  // TODO: change Quantity later
-            item.Price = medicine.Price;
-            item.MedicineId = medicine.Id;
-            db.TrolleyItems.Add(item);
+            Medicine medicine = db.Medicines.Find(id);
+            var trolleyItems = db.TrolleyItems.Where(t =>
+                t.CustomerId == currentCustomerId);
+            TrolleyItem toUpdateItem = trolleyItems.FirstOrDefault(t =>
+                t.MedicineId == medicine.Id);
+            
+            if (toUpdateItem == null)
+            {
+                TrolleyItem item = new TrolleyItem();
+                item.CustomerId = currentCustomerId;
+                item.Quantity = 1;
+                item.Price = medicine.Price;
+                item.MedicineId = medicine.Id;
+                db.TrolleyItems.Add(item);
 
-            db.SaveChanges();
-
+                db.SaveChanges();
+            }
+            else
+            {
+                toUpdateItem.Quantity += 1;
+                db.Entry(toUpdateItem).State = EntityState.Modified;
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
         // End -----
@@ -73,6 +88,7 @@ namespace NiceNeighbourPharmacy.Controllers
         }
 
         // GET: Medicines/Create
+        [Authorize(Roles = "Pharmacist")]
         public ActionResult Create()
         {
             return View();
@@ -83,6 +99,7 @@ namespace NiceNeighbourPharmacy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Pharmacist")]
         public ActionResult Create([Bind(Include = "Id,Name,Description,Category,Price,NumberOfStock,AvgRatings,Notes")] Medicine medicine)
         {
             if (ModelState.IsValid)
@@ -96,6 +113,7 @@ namespace NiceNeighbourPharmacy.Controllers
         }
 
         // GET: Medicines/Edit/5
+        [Authorize(Roles = "Pharmacist")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -115,6 +133,7 @@ namespace NiceNeighbourPharmacy.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Pharmacist")]
         public ActionResult Edit([Bind(Include = "Id,Name,Description,Category,Price,NumberOfStock,AvgRatings,Notes")] Medicine medicine)
         {
             if (ModelState.IsValid)
@@ -126,7 +145,9 @@ namespace NiceNeighbourPharmacy.Controllers
             return View(medicine);
         }
 
+
         // GET: Medicines/Delete/5
+        [Authorize(Roles = "Pharmacist")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -144,6 +165,7 @@ namespace NiceNeighbourPharmacy.Controllers
         // POST: Medicines/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Pharmacist")]
         public ActionResult DeleteConfirmed(int id)
         {
             Medicine medicine = db.Medicines.Find(id);

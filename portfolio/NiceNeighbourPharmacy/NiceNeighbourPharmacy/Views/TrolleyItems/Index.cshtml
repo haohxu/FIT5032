@@ -7,10 +7,10 @@
 
 <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
 
-<h2>Index</h2>
+<h2>Your e-Trolley</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @*@Html.ActionLink("Create New", "Create")*@
 </p>
 <table class="table">
     <thead>
@@ -25,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CustomerId)
+                @*@Html.DisplayNameFor(model => model.CustomerId)*@
             </th>
             <th></th>
         </tr>
@@ -45,11 +45,11 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CustomerId)
+                    @*@Html.DisplayFor(modelItem => item.CustomerId)*@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>
             </tr>

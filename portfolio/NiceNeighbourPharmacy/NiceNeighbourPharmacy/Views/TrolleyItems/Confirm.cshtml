@@ -7,6 +7,31 @@
 
 <h2>Order Summary</h2>
 
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+<!-- Include Moment.js CDN -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js">
+</script>
+
+<!-- Include Bootstrap DateTimePicker CDN -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.49/js/bootstrap-datetimepicker.min.js"
+        integrity="sha512-jPwanAeILSRxZLeyP1XYBOo67+how4C1Ij54LQSa8xIOP3hKyeWRe24C0scI4QrTeQywKd1meF4Pak/Glv34vA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.49/css/bootstrap-datetimepicker.min.css"
+      integrity="sha512-ipfmbgqfdejR27dWn02UftaAzUfxJ3HR4BDQYuITYSj6ZQfGT1NulP4BOery3w/dT2PYAe3bG5Zm/owm7MuFhA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+
+@Styles.Render("~/Content/css")
+
+
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
 </p>
@@ -29,7 +54,7 @@
         </th>
         <th></th>
     </tr>
-    
+
     @foreach (var item in Model.TrolleyItems)
     {
         <tr>
@@ -66,8 +91,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CollectDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CollectDateTime, new { htmlAttributes = new { @class = "form-control", @type = "datetime-local", @value = DateTime.Now.ToString("MM/dd/yyyyTHH:mm") } })
+                @*@Html.EditorFor(model => model.CollectDateTime, new { htmlAttributes = new { @class = "form-control", @type = "datetime-local", @value = DateTime.Now.ToString("YYYY-MM-ddTHH:mm") } })*@
+                @Html.EditorFor(model => model.CollectDateTime, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "datetime" } })
                 @Html.ValidationMessageFor(model => model.CollectDateTime, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
@@ -80,3 +107,12 @@
     </div>
 }
 
+<script>
+    $('#datetime').datetimepicker({
+        format: 'YYYY-MM-DD HH:mm',
+        minDate: new Date(),
+        disabledHours: [0, 1, 2, 3, 4, 5, 6, 7, 8, 18, 19, 20, 21, 22, 23, 24],
+        daysOfWeekDisabled: [0, 6],
+        stepping: 15,
+    });
+</script>
