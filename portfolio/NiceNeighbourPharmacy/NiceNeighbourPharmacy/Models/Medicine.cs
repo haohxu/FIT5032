@@ -19,13 +19,16 @@ namespace NiceNeighbourPharmacy.Models
 
         [Required]
         public string Name { get; set; }
-
+        [Required]
         public string Description { get; set; }
-
+        
         public string Category { get; set; }
-
+        [Required]
+        [Range(0.001, double.MaxValue, ErrorMessage = "Price must be positive decimal")]
         public decimal? Price { get; set; }
 
+        [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "stock must be non-negative integer")]
         public int? NumberOfStock { get; set; }
 
         public decimal? AvgRatings { get; set; }

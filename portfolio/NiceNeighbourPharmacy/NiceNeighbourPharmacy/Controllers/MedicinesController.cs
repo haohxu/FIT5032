@@ -43,17 +43,31 @@ namespace NiceNeighbourPharmacy.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddToTrolleyConfirmed(int id)
         {
-            Medicine medicine = db.Medicines.Find(id);
+            var currentCustomerId = User.Identity.GetUserId();
             
-            TrolleyItem item = new TrolleyItem();
-            item.CustomerId = User.Identity.GetUserId();
-            item.Quantity = 1;
-            item.Price = medicine.Price;
-            item.MedicineId = medicine.Id;
-            db.TrolleyItems.Add(item);
+            Medicine medicine = db.Medicines.Find(id);
+            var trolleyItems = db.TrolleyItems.Where(t =>
+                t.CustomerId == currentCustomerId);
+            TrolleyItem toUpdateItem = trolleyItems.FirstOrDefault(t =>
+                t.MedicineId == medicine.Id);
+            
+            if (toUpdateItem == null)
+            {
+                TrolleyItem item = new TrolleyItem();
+                item.CustomerId = currentCustomerId;
+                item.Quantity = 1;
+                item.Price = medicine.Price;
+                item.MedicineId = medicine.Id;
+                db.TrolleyItems.Add(item);
 
-            db.SaveChanges();
-
+                db.SaveChanges();
+            }
+            else
+            {
+                toUpdateItem.Quantity += 1;
+                db.Entry(toUpdateItem).State = EntityState.Modified;
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
         // End -----

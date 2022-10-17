@@ -398,6 +398,10 @@ namespace NiceNeighbourPharmacy.Controllers
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    // Start - Default assign role as customer
+                    var roleResult = UserManager.AddToRole(user.Id, "Customer");
+                    // End -----
+
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
