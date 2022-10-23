@@ -28,6 +28,7 @@ namespace NiceNeighbourPharmacy.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult LiveChat()
         {
             return View();

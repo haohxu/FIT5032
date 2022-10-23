@@ -36,7 +36,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    
+
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Medicines", "Index", "Medicines")</li>
@@ -65,3 +65,43 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+<!--
+    tutorial of customizing style:
+    https://www.c-sharpcorner.com/article/customizing-navbar-in-mvc-5-with-bootstrap/
+    -->
+<style>
+    .navbar-inverse {
+        background-color: #512DA8;
+        border-color: #673AB7;
+    }
+
+        .navbar-inverse .navbar-brand {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: #fff;
+        }
+
+            .navbar-inverse .navbar-brand:hover,
+            .navbar-inverse .navbar-brand:focus {
+                color: #D2B4DE;
+                background-color: transparent;
+            }
+
+        .navbar-inverse .navbar-text {
+            color: #fff;
+            background-color: transparent;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #fff;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 15px;
+            background-color: transparent;
+        }
+
+            .navbar-inverse .navbar-nav > li > a:hover,
+            .navbar-inverse .navbar-nav > li > a:focus {
+                color: #D2B4DE;
+            }
+
+</style>

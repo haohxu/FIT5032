@@ -2,34 +2,55 @@
     ViewBag.Title = "Home Page";
 }
 
+<!--
+    background image tutorial source:
+    https://stackoverflow.com/questions/22000754/responsive-bootstrap-jumbotron-background-image
+    -->
 <div class="jumbotron">
-    <h1>Nice Neighbor Pharmacy</h1>
-    <p>Welcome to Nice Neighbor Pharmacy</p>
-    <p>We are the best e-platform for choosing great medicines!</p>
-    <p>We are here to protect your health!</p>
+    <div class="container push-spaces">
+    </div>
 </div>
+
+<!-- origin of the image: https://www.shutterstock.com/image-vector/pharmacy-business-drug-store-industry-banner-1336422494 -->
+<style>
+    .jumbotron {
+        background: url("../../Content/banner.jpg") no-repeat center center;
+        background-size: 100% 100%;
+    }
+
+    .push-spaces {
+        height: 300px;
+    }
+</style>
+<h1>Nice Neighbor Pharmacy</h1>
+<p>Welcome!</p>
+<p>We are the best e-platform for choosing great medicines!</p>
+<p>We are here to protect your health!</p>
 
 <div class="row">
     @if (!User.Identity.IsAuthenticated)
     {
-    <div class="col-md-4">
-        <h2>Please Login First</h2>
-        <p>
-            Please login or regist to get full access!
-        </p>
-        <p></p>
-    </div>
+        <div class="col-md-4">
+            <h2>Please Login First</h2>
+            <p>
+                Please login or regist to get full access!
+            </p>
+            <p></p>
+        </div>
     }
-    <div class="col-md-4">
-        <h2>What to see our location?</h2>
-        <p></p>
-        <p>@Html.ActionLink("Maps", "Index", "Locations")</p>
-    </div>
-    <div class="col-md-4">
-        <h2>Want to have live chat with our pharmacists?</h2>
-        <p></p>
-        <p>@Html.ActionLink("Live Chat", "LiveChat", "Home")</p>
-    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="col-md-4">
+            <h2>What to see our location?</h2>
+            <p></p>
+            <p>@Html.ActionLink("Maps", "Index", "Locations")</p>
+        </div>
+        <div class="col-md-4">
+            <h2>Want to have live chat with our pharmacists?</h2>
+            <p></p>
+            <p>@Html.ActionLink("Live Chat", "LiveChat", "Home")</p>
+        </div>
+    }
     <div class="col-md-4">
         <h2>Our Information</h2>
         <p>@Html.ActionLink("About", "About", "Home")</p>

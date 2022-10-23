@@ -14,6 +14,7 @@ using NiceNeighbourPharmacy.Utils;
 
 namespace NiceNeighbourPharmacy.Controllers
 {
+    [RequireHttps]
     [Authorize]
     public class OrdersController : Controller
     {
@@ -98,6 +99,13 @@ namespace NiceNeighbourPharmacy.Controllers
             [Bind(Include = "Subject,Contents")] SendGroupEmailViewModel model, 
             HttpPostedFileBase postedFile)
         {
+            var orders = db.Orders.Where(t =>
+                    t.Status == "Ready to Collect"
+                );
+
+            SendGroupEmailViewModel sendGroupEmailViewModel = new SendGroupEmailViewModel();
+            sendGroupEmailViewModel.Orders = orders;
+
             if (ModelState.IsValid)
             {
 
@@ -114,11 +122,6 @@ namespace NiceNeighbourPharmacy.Controllers
                     new UserStore<ApplicationUser>(
                         new ApplicationDbContext()));
 
-                var orders = db.Orders.Where(t =>
-                    t.Status == "Ready to Collect"
-                );
-
-
                 try
                 {
                     foreach (var order in orders)
@@ -132,12 +135,14 @@ namespace NiceNeighbourPharmacy.Controllers
                 }
                 catch
                 {
-                    return View();
+                    return View(sendGroupEmailViewModel);
                 }
                 return RedirectToAction("Index");
             }
 
-            return View(model);
+            
+
+            return View(sendGroupEmailViewModel);
         }
         // End -----
 
