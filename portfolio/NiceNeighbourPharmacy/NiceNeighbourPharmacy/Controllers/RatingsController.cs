@@ -11,6 +11,7 @@ using NiceNeighbourPharmacy.Models;
 
 namespace NiceNeighbourPharmacy.Controllers
 {
+    [RequireHttps]
     [Authorize(Roles = "Customer")]
     public class RatingsController : Controller
     {

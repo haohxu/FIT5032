@@ -10,6 +10,8 @@ using NiceNeighbourPharmacy.Models;
 
 namespace NiceNeighbourPharmacy.Controllers
 {
+    [RequireHttps]
+    [Authorize]
     public class LocationsController : Controller
     {
         private NNPharmacyModels db = new NNPharmacyModels();

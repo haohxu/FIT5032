@@ -38,7 +38,7 @@ namespace NiceNeighbourPharmacy.Models
 
         public BookingNoOverlapAttribute() { }
 
-        public string GetErrorMessage() => $"Collection Date and Time cannot overlap!";
+        public string GetErrorMessage() => $"Collection Date and Time cannot overlap! Please choose another time.";
 
         protected override ValidationResult IsValid(
             object value, ValidationContext validationContext)

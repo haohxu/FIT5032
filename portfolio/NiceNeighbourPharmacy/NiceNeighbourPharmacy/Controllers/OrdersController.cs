@@ -14,6 +14,7 @@ using NiceNeighbourPharmacy.Utils;
 
 namespace NiceNeighbourPharmacy.Controllers
 {
+    [RequireHttps]
     [Authorize]
     public class OrdersController : Controller
     {

@@ -14,8 +14,10 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/mapbox/streets-v11', // style URL
     center: [LOCATION_DEFAULT.longitude, LOCATION_DEFAULT.latitude], // starting position [lng, lat],
     zoom: 12, // starting zoom
-    projection: 'globe' // display the map as a 3D globe
+    cooperativeGestures: true
+    // projection: 'globe' // display the map as a 3D globe
 });
+
 map.on('style.load', () => {
     map.setFog({}); // Set the default atmosphere style
 });
@@ -35,7 +37,10 @@ map.addControl(
 );
 
 // add the Full Screen control
-map.addControl(new mapboxgl.FullscreenControl(), 'bottom-right');
+map.addControl(
+    new mapboxgl.FullscreenControl(),
+    'bottom-right'
+);
 
 // add the Direction control
 map.addControl(
